@@ -1,4 +1,4 @@
-package com.luccmf.users.handler.model
+package com.luccmf.users.models
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
@@ -24,5 +24,4 @@ data class User(
     @JsonDeserialize(using = LocalDateDeserializer::class)
     @JsonFormat(pattern = "yyyy-MM-dd")
     val birthDate: LocalDate
-) {
-}
+)

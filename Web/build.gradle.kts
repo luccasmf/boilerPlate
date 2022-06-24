@@ -1,10 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     kotlin("jvm")
     id("org.jetbrains.kotlin.kapt") version "1.6.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.6.21"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.6.21"
+    id("org.jetbrains.kotlin.plugin.jpa")
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.4.1"
 }
@@ -17,7 +18,7 @@ val kotlinVersion=project.properties.get("kotlinVersion")
 
 dependencies {
     implementation(project(":Domain"))
-    implementation(project(":Infra"))
+    implementation(project(":Application"))
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut:micronaut-http-validation")
     kapt("io.micronaut.openapi:micronaut-openapi")
@@ -25,7 +26,7 @@ dependencies {
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    //implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
     implementation("io.swagger.core.v3:swagger-annotations")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -48,6 +49,7 @@ application {
 tasks {
     compileKotlin {
         kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "17"
         }
     }
@@ -65,6 +67,7 @@ micronaut {
         incremental(true)
         annotations("com.luccmf.*")
     }
+
 }
 
 
