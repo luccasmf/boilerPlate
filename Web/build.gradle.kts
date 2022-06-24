@@ -9,9 +9,15 @@ plugins {
     id("io.micronaut.application") version "3.4.1"
 }
 
+repositories {
+    mavenCentral()
+}
+
 val kotlinVersion=project.properties.get("kotlinVersion")
 
 dependencies {
+    implementation(project(":Domain"))
+    implementation(project(":Infra"))
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut:micronaut-http-validation")
     kapt("io.micronaut.openapi:micronaut-openapi")

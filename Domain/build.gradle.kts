@@ -1,10 +1,15 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
 }
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 dependencies {
+    implementation(project(":Infra"))
     implementation ("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut:micronaut-jackson-databind")
@@ -20,9 +25,15 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
     }
 }
