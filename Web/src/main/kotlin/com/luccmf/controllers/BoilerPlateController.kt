@@ -1,4 +1,4 @@
-package com.luccmf
+package com.luccmf.controllers
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
