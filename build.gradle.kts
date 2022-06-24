@@ -19,34 +19,32 @@ dependencies {
     kapt("io.micronaut.data:micronaut-data-processor")
     kapt("io.micronaut:micronaut-http-validation")
     kapt("io.micronaut.openapi:micronaut-openapi")
-    kapt("io.micronaut.security:micronaut-security-annotations")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.data:micronaut-data-jdbc")
-    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("jakarta.persistence:jakarta.persistence-api")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("io.micronaut.security:micronaut-security-jwt")
-    implementation("io.micronaut.security:micronaut-security-oauth2")
-    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
-    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    implementation("io.swagger.core.v3:swagger-annotations")
+    //implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("jakarta.persistence:jakarta.persistence-api")
     implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.micronaut.kotlin:micronaut-kotlin-extension-functions")
+    implementation("io.swagger.core.v3:swagger-annotations")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.2")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.h2database:h2")
     implementation("io.micronaut:micronaut-validation")
+    testImplementation("io.mockk:mockk:1.12.4")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }
 
-
 application {
     mainClass.set("com.luccmf.ApplicationKt")
-}
-java {
-    sourceCompatibility = JavaVersion.toVersion("17")
 }
 
 tasks {
@@ -70,6 +68,8 @@ micronaut {
         annotations("com.luccmf.*")
     }
 }
-
+kapt {
+    correctErrorTypes  = true
+}
 
 
